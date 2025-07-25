@@ -1,0 +1,29 @@
+
+WALLET RISK SCORING SUMMARY REPORT
+==================================
+Generated on: 2025-07-25 15:22:00
+
+DATASET OVERVIEW:
+- Total wallets analyzed: 103
+- Average risk score: 447.4
+- Standard deviation: 184.7
+- Median risk score: 516.0
+
+RISK DISTRIBUTION:
+- High Risk (750-1000): 1 wallets (1.0%)
+- Medium Risk (500-749): 55 wallets (53.4%)
+- Low Risk (0-499): 47 wallets (45.6%)
+
+TOP 5 HIGHEST RISK WALLETS:
+                                 wallet_id  score
+0x4e6e724f4163b24ffc7ffe662b5f6815b18b4210    785
+0x58d68d4bcf9725e40353379cec92b90332561683    648
+0xf54f36bca969800fd7d63a68029561309938c09b    645
+0x1656f1886c5ab634ac19568cd571bc72f385fdf7    638
+0x3867d222ba91236ad4d12c31056626f9e798629c    636
+
+METHODOLOGY USED:
+- Data Source: Compound V2/V3 Protocol
+- Scoring Range: 0-1000 (higher = riskier)
+- Key Factors: Liquidation history, leverage ratios, portfolio concentration, transaction patterns
+- Time Period: Last 6 months of activity

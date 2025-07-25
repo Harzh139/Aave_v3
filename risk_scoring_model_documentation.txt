@@ -1,0 +1,39 @@
+Wallet Risk Scoring Model Documentation
+======================================
+
+Feature Selection:
+------------------
+The following features (metrics) are used to assess the risk of each wallet:
+1. Liquidation History: Number of times the wallet has been liquidated.
+2. Leverage Ratio: The ratio of total borrowed to total supplied assets.
+3. Health Factor Violations: Simulated count of health factor violations.
+4. Transaction Volatility: Frequency of transactions over the wallet's active period.
+5. Portfolio Concentration: Number of unique tokens interacted with.
+6. Large Transaction Count: Number of transactions significantly larger than the median.
+7. Activity Pattern: Number of days the wallet has been active.
+
+Normalization Method:
+---------------------
+Each feature is normalized or capped to a specific range to ensure comparability and to prevent any single feature from dominating the score:
+- Liquidation History: Capped at 3 events (0-300 points, 100 points per event).
+- Leverage Ratio: Capped at 4.0 (0-200 points, 50 points per unit).
+- Health Factor Violations: Capped at 10 (0-150 points, 15 points per violation).
+- Transaction Volatility: Scaled to a maximum of 100 points.
+- Portfolio Concentration: 100 points for <=2 tokens, 50 for 3 tokens, 0 otherwise.
+- Large Transaction Count: Capped at 10 (0-100 points, 10 points per event).
+- Activity Pattern: 50 points for <30 days, 0 for >365 days, linearly interpolated in between.
+
+Scoring Logic:
+--------------
+The risk score is computed as the sum of the normalized feature scores, with the following weights:
+- Liquidation History: up to 300 points
+- Leverage Ratio: up to 200 points
+- Health Factor Violations: up to 150 points
+- Transaction Volatility: up to 100 points
+- Portfolio Concentration: up to 100 points
+- Large Transaction Count: up to 100 points
+- Activity Pattern: up to 50 points
+
+The total score is capped between 0 and 1000. Higher scores indicate higher risk.
+
+See the calculate_risk_score() method in main.py for implementation details. 
